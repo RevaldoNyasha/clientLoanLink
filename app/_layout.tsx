@@ -21,10 +21,10 @@ export default function RootLayout() {
     <CartProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Drawer>
-          <Drawer.Screen name="dashboard" options={{ drawerLabel: 'Dashboard' }} />
-          <Drawer.Screen name="applications" options={{ drawerLabel: 'Applications' }} />
-          <Drawer.Screen name="companies" options={{ drawerLabel: 'Companies' }} />
-          <Drawer.Screen name="profile" options={{ drawerLabel: 'Profile' }} />
+          <Drawer.Screen name="drawer/dashboard" options={{ drawerLabel: 'Dashboard' }} />
+          <Drawer.Screen name="drawer/applications" options={{ drawerLabel: 'Applications' }} />
+          <Drawer.Screen name="drawer/companies" options={{ drawerLabel: 'Companies' }} />
+          <Drawer.Screen name="drawer/profile" options={{ drawerLabel: 'Profile' }} />
         </Drawer>
         <StatusBar style="auto" />
       </ThemeProvider>
