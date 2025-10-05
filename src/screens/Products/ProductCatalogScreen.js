@@ -66,7 +66,7 @@ const ProductCatalogScreen = ({ navigation }) => {
           <View style={styles.detailItem}>
             <Ionicons name="cash-outline" size={16} color="#28A745" />
             <Text style={styles.detailText}>
-              ${product.minAmount.toLocaleString()} - ${product.maxAmount.toLocaleString()}
+              RTGS ${product.minAmount.toLocaleString()} - RTGS ${product.maxAmount.toLocaleString()}
             </Text>
           </View>
           <View style={styles.detailItem}>

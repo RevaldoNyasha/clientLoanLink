@@ -2,7 +2,7 @@ export const applications = [
   {
     id: '1',
     companyId: '1',
-    companyName: 'ABC Microfinance Ltd',
+    companyName: 'DHL',
     loanAmount: 150000,
     purpose: 'Business Expansion',
     repaymentTerm: 18,
@@ -19,7 +19,7 @@ export const applications = [
   {
     id: '2',
     companyId: '2',
-    companyName: 'XYZ Credit Union',
+    companyName: 'CBZ Bank',
     loanAmount: 75000,
     purpose: 'Personal Emergency',
     repaymentTerm: 12,
@@ -36,7 +36,7 @@ export const applications = [
   {
     id: '3',
     companyId: '3',
-    companyName: 'QuickCash Solutions',
+    companyName: 'ABC Bank',
     loanAmount: 30000,
     purpose: 'Medical Emergency',
     repaymentTerm: 6,
@@ -53,7 +53,7 @@ export const applications = [
   {
     id: '4',
     companyId: '4',
-    companyName: 'Green Finance Co.',
+    companyName: 'Stanbic Bank',
     loanAmount: 500000,
     purpose: 'Solar Panel Installation',
     repaymentTerm: 36,

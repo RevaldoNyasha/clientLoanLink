@@ -142,7 +142,12 @@ const DashboardScreen = ({ navigation }) => {
 
       <View style={styles.statsContainer}>
         <Text style={styles.sectionTitle}>Your Statistics</Text>
-        <View style={styles.statsGrid}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.statsGrid}
+          contentContainerStyle={styles.statsContent}
+        >
           <Card style={styles.statCard}>
             <Text style={styles.statNumber}>{stats.totalApplications}</Text>
             <Text style={styles.statLabel}>Total Applications</Text>
@@ -161,7 +166,7 @@ const DashboardScreen = ({ navigation }) => {
             </Text>
             <Text style={styles.statLabel}>Total Borrowed</Text>
           </Card>
-        </View>
+        </ScrollView>
       </View>
 
       <View style={styles.quickActionsContainer}>
@@ -279,12 +284,14 @@ const styles = StyleSheet.create({
   },
   statsGrid: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+  },
+  statsContent: {
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   statCard: {
-    width: '48%',
-    marginBottom: 12,
+    width: 160,
+    marginRight: 12,
     alignItems: 'center',
     padding: 16,
   },

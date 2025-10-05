@@ -10,7 +10,7 @@ export const authService = {
             user: {
               id: '1',
               email,
-              name: 'John Doe',
+              name: 'revaldo',
               nationalId: '1234567890',
               dob: '1990-01-01',
               employmentType: 'Private Sector',

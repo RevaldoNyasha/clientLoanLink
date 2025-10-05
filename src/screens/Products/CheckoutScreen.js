@@ -111,7 +111,7 @@ const CheckoutScreen = ({ navigation }) => {
         <Text style={styles.cartItemQuantity}>Qty: {item.quantity}</Text>
       </View>
       <Text style={styles.cartItemPrice}>
-        ${(item.price * item.quantity).toLocaleString()}
+        RTGS ${(item.price * item.quantity).toLocaleString()}
       </Text>
     </View>
   );
@@ -132,7 +132,7 @@ const CheckoutScreen = ({ navigation }) => {
           {cart.map(renderCartItem)}
           <View style={styles.totalRow}>
             <Text style={styles.totalLabel}>Total Amount:</Text>
-            <Text style={styles.totalValue}>${getCartTotal().toLocaleString()}</Text>
+          <Text style={styles.totalValue}>RTGS ${getCartTotal().toLocaleString()}</Text>
           </View>
         </Card>
 

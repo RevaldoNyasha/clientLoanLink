@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
       const userData = {
         id: '1',
         email,
-        name: 'John Doe',
+        name: 'Nyasha',
         nationalId: '1234567890',
         dob: '1990-01-01',
         employmentType: 'Private Sector',

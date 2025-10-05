@@ -73,7 +73,7 @@ const MyApplicationsScreen = ({ navigation }) => {
           <View style={styles.applicationInfo}>
             <Text style={styles.companyName}>{application.companyName}</Text>
             <Text style={styles.loanAmount}>
-              ${application.loanAmount.toLocaleString()}
+              RTGS ${application.loanAmount.toLocaleString()}
             </Text>
           </View>
           <View style={styles.statusContainer}>
@@ -102,7 +102,7 @@ const MyApplicationsScreen = ({ navigation }) => {
           </View>
           <View style={styles.detailRow}>
             <Text style={styles.detailLabel}>Monthly Payment:</Text>
-            <Text style={styles.detailValue}>${application.monthlyPayment.toLocaleString()}</Text>
+            <Text style={styles.detailValue}>RTGS ${application.monthlyPayment.toLocaleString()}</Text>
           </View>
           <View style={styles.detailRow}>
             <Text style={styles.detailLabel}>Applied:</Text>
