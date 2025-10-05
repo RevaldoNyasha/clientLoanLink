@@ -1,8 +1,8 @@
-# AlphaClientLoan - Financial Marketplace System
+# AlphaClientLoan - Financial System
 
 A comprehensive React Native application built with Expo that provides a complete financial marketplace experience for loan applications and financial product management.
 
-## 🚀 Features
+## Features
 
 ### Authentication System
 - **Login Screen**: Email and password authentication
@@ -39,7 +39,7 @@ A comprehensive React Native application built with Expo that provides a complet
 - **Checkout Process**: Complete application with payment details
 - **Installment Plans**: Flexible payment options
 
-## 🏗️ Architecture
+##  Architecture
 
 ### Navigation Structure
 - **React Navigation**: Stack and Bottom Tab navigation
@@ -74,7 +74,7 @@ src/
 └── data/                # Dummy data files
 ```
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 - **React Native**: Cross-platform mobile development
 - **Expo**: Development platform and tools
@@ -83,7 +83,7 @@ src/
 - **AsyncStorage**: Local data persistence
 - **TypeScript**: Type safety (optional)
 
-## 📱 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -113,7 +113,7 @@ src/
    - Press `a` for Android emulator
    - Scan QR code with Expo Go app on physical device
 
-## 🧪 Testing the Application
+##  Testing the Application
 
 ### Demo Credentials
 - **Email**: `demo@example.com`
@@ -134,7 +134,7 @@ The application includes comprehensive dummy data for:
 - **Products**: Various financial products with pricing
 - **Applications**: Sample loan applications with different statuses
 
-## 🔧 Configuration
+##  Configuration
 
 ### Environment Setup
 - No environment variables required for basic functionality
@@ -147,7 +147,7 @@ The application includes comprehensive dummy data for:
 - **Data**: Replace dummy data in `src/data/` with real API calls
 - **Validation**: Customize validation rules in `src/utils/validators.js`
 
-## 📋 Available Scripts
+##  Available Scripts
 
 - `npm start`: Start Expo development server
 - `npm run android`: Start Android development build
@@ -155,7 +155,7 @@ The application includes comprehensive dummy data for:
 - `npm run web`: Start web development build
 - `npm run lint`: Run ESLint for code quality
 
-## 🚀 Deployment
+##  Deployment
 
 ### Building for Production
 ```bash
@@ -171,7 +171,7 @@ expo build:ios
 2. Build production binaries
 3. Submit to respective app stores
 
-## 🔮 Future Enhancements
+##  Enhancements
 
 - **Backend Integration**: Replace dummy data with real API calls
 - **Push Notifications**: Application status updates
@@ -180,21 +180,7 @@ expo build:ios
 - **Advanced Analytics**: User behavior tracking
 - **Multi-language Support**: Internationalization
 
-## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## 📞 Support
-
-For support and questions, please contact the development team or create an issue in the repository.
 
 ---
 
