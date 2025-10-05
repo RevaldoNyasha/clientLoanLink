@@ -182,6 +182,3 @@ expo build:ios
 
 
 
----
-
-**Built with ❤️ using React Native and Expo**
