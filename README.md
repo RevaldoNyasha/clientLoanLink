@@ -177,8 +177,8 @@ expo build:ios
 - **Push Notifications**: Application status updates
 - **Biometric Authentication**: Enhanced security
 - **Offline Support**: Cached data for offline usage
-- **Advanced Analytics**: User behavior tracking
-- **Multi-language Support**: Internationalization
+- **Advanced Analytics**: User behavior tracking (AI)
+
 
 
 
