@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Alert,
     ScrollView,
@@ -32,17 +32,16 @@ const DashboardScreen = ({ navigation }) => {
   }, []);
 
   const handleKYCAlert = () => {
-    console.log('KYC button pressed');
+    console.log('Verification button pressed');
     Alert.alert(
-      'KYC Required',
-      'Please complete your KYC verification to access all features.',
-      [
-        {
+      'Verification Required',
+      'Please complete verification to access all features.',
+      [        {
           text: 'Cancel',
           style: 'cancel',
         },
         {
-          text: 'Complete KYC',
+          text: 'Verify Now',
           onPress: () => {
             console.log('Navigating to Profile');
             navigation.navigate('Profile');
@@ -123,9 +122,9 @@ const DashboardScreen = ({ navigation }) => {
           <View style={styles.kycContent}>
             <Ionicons name="warning-outline" size={24} color="#FF6B35" />
             <View style={styles.kycText}>
-              <Text style={styles.kycTitle}>KYC Verification Required</Text>
+              <Text style={styles.kycTitle}>Verification Required</Text>
               <Text style={styles.kycSubtitle}>
-                Complete your KYC to access all features
+                Complete your verification to access all features
               </Text>
             </View>
             <View style={styles.kycButtons}>

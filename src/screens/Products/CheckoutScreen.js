@@ -7,98 +7,35 @@ import {
     ScrollView,
     StyleSheet,
     Text,
+    TextInput,
+    TouchableOpacity,
     View,
 } from 'react-native';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
-import InputField from '../../components/InputField';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
-import { validators } from '../../utils/validators';
 
 const CheckoutScreen = ({ navigation }) => {
-  const { cart, getCartTotal, clearCart } = useCart();
+  const { cart, getCartTotal } = useCart();
   const { user } = useAuth();
-  const [formData, setFormData] = useState({
-    installmentPlan: '',
-    downPayment: '',
-    creditHistory: '',
-    paymentMethod: '',
-    termsAccepted: false,
-  });
-  const [errors, setErrors] = useState({});
+
+  const [cartExpanded, setCartExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const installmentPlans = [
-    { label: 'Monthly', value: 'monthly' },
-    { label: 'Quarterly', value: 'quarterly' },
-    { label: 'Semi-Annual', value: 'semi-annual' },
-    { label: 'Annual', value: 'annual' },
-  ];
+  const [desiredAmount, setDesiredAmount] = useState('0.00');
+  const [downPayment, setDownPayment] = useState('');
+  const [annualIncome, setAnnualIncome] = useState('');
+  const [creditHistory, setCreditHistory] = useState('');
 
-  const creditHistoryOptions = [
-    { label: 'Excellent (750+)', value: 'excellent' },
-    { label: 'Good (700-749)', value: 'good' },
-    { label: 'Fair (650-699)', value: 'fair' },
-    { label: 'Poor (Below 650)', value: 'poor' },
-  ];
-
-  const paymentMethods = [
-    { label: 'Bank Transfer', value: 'bank-transfer' },
-    { label: 'Credit Card', value: 'credit-card' },
-    { label: 'Mobile Money', value: 'mobile-money' },
-    { label: 'Cash', value: 'cash' },
-  ];
-
-  const handleInputChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: null }));
-    }
-  };
-
-  const validateForm = () => {
-    const rules = {
-      installmentPlan: [validators.required],
-      downPayment: [validators.required],
-      creditHistory: [validators.required],
-      paymentMethod: [validators.required],
-    };
-    
-    const { isValid, errors: validationErrors } = validators.validateForm(formData, rules);
-    setErrors(validationErrors);
-    return isValid;
-  };
-
-  const handleSubmitApplication = async () => {
-    if (!validateForm()) return;
-
-    if (!formData.termsAccepted) {
-      Alert.alert('Terms Required', 'Please accept the terms and conditions to proceed.');
-      return;
-    }
-
+  const handleSubmit = async () => {
     setLoading(true);
     try {
-      // Simulate application submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      Alert.alert(
-        'Application Submitted',
-        'Your loan application has been submitted successfully. You will receive a confirmation email shortly.',
-        [
-          {
-            text: 'OK',
-            onPress: () => {
-              clearCart();
-              navigation.navigate('Applications');
-            },
-          },
-        ]
-      );
-    } catch (error) {
-      Alert.alert('Error', 'An error occurred while submitting your application');
+      // Future: integrate API POST /api/credit-applications with form payload
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      Alert.alert('Submitted', 'Your credit application has been submitted.');
+    } catch (e) {
+      Alert.alert('Error', 'Failed to submit application.');
     } finally {
       setLoading(false);
     }
@@ -110,9 +47,7 @@ const CheckoutScreen = ({ navigation }) => {
         <Text style={styles.cartItemName}>{item.name}</Text>
         <Text style={styles.cartItemQuantity}>Qty: {item.quantity}</Text>
       </View>
-      <Text style={styles.cartItemPrice}>
-        RTGS ${(item.price * item.quantity).toLocaleString()}
-      </Text>
+      <Text style={styles.cartItemPrice}>${(item.price * item.quantity).toLocaleString()}</Text>
     </View>
   );
 
@@ -123,110 +58,105 @@ const CheckoutScreen = ({ navigation }) => {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
-          <Text style={styles.title}>Checkout</Text>
-          <Text style={styles.subtitle}>Complete your loan application</Text>
+          <Text style={styles.title}>Credit Application</Text>
+          <Text style={styles.subtitle}>
+            This application finalizes products from your cart. Personal and employment details will be pulled from your profile.
+          </Text>
         </View>
 
         <Card style={styles.orderSummaryCard}>
-          <Text style={styles.sectionTitle}>Order Summary</Text>
-          {cart.map(renderCartItem)}
-          <View style={styles.totalRow}>
-            <Text style={styles.totalLabel}>Total Amount:</Text>
-          <Text style={styles.totalValue}>RTGS ${getCartTotal().toLocaleString()}</Text>
-          </View>
-        </Card>
-
-        <Card style={styles.paymentCard}>
-          <Text style={styles.sectionTitle}>Payment Details</Text>
-          
-          <InputField
-            label="Installment Plan"
-            value={formData.installmentPlan}
-            onChangeText={(value) => handleInputChange('installmentPlan', value)}
-            placeholder="Select installment plan"
-            error={errors.installmentPlan}
-          />
-
-          <InputField
-            label="Down Payment"
-            value={formData.downPayment}
-            onChangeText={(value) => handleInputChange('downPayment', value)}
-            placeholder="Enter down payment amount"
-            keyboardType="numeric"
-            error={errors.downPayment}
-          />
-
-          <InputField
-            label="Credit History"
-            value={formData.creditHistory}
-            onChangeText={(value) => handleInputChange('creditHistory', value)}
-            placeholder="Select your credit history"
-            error={errors.creditHistory}
-          />
-
-          <InputField
-            label="Payment Method"
-            value={formData.paymentMethod}
-            onChangeText={(value) => handleInputChange('paymentMethod', value)}
-            placeholder="Select payment method"
-            error={errors.paymentMethod}
-          />
-        </Card>
-
-        <Card style={styles.userInfoCard}>
-          <Text style={styles.sectionTitle}>Applicant Information</Text>
-          <View style={styles.userInfo}>
-            <Text style={styles.userInfoLabel}>Name:</Text>
-            <Text style={styles.userInfoValue}>{user?.name || 'Not provided'}</Text>
-          </View>
-          <View style={styles.userInfo}>
-            <Text style={styles.userInfoLabel}>Email:</Text>
-            <Text style={styles.userInfoValue}>{user?.email || 'Not provided'}</Text>
-          </View>
-          <View style={styles.userInfo}>
-            <Text style={styles.userInfoLabel}>National ID:</Text>
-            <Text style={styles.userInfoValue}>{user?.nationalId || 'Not provided'}</Text>
-          </View>
-          <View style={styles.userInfo}>
-            <Text style={styles.userInfoLabel}>KYC Status:</Text>
-            <View style={styles.kycStatus}>
-              <Ionicons 
-                name={user?.kycComplete ? "checkmark-circle" : "warning"} 
-                size={16} 
-                color={user?.kycComplete ? "#28A745" : "#FF6B35"} 
-              />
-              <Text style={[
-                styles.kycText,
-                { color: user?.kycComplete ? "#28A745" : "#FF6B35" }
-              ]}>
-                {user?.kycComplete ? 'Verified' : 'Pending'}
-              </Text>
+          <TouchableOpacity style={styles.summaryHeaderRow} onPress={() => setCartExpanded(prev => !prev)}>
+            <Text style={styles.sectionTitle}>
+              Cart Summary ({cart.length} item{cart.length !== 1 ? 's' : ''})
+            </Text>
+            <Ionicons name={cartExpanded ? 'chevron-up' : 'chevron-down'} size={20} color="#333" />
+          </TouchableOpacity>
+          {cartExpanded && (
+            <View style={{ marginBottom: 8 }}>
+              {cart.length === 0 ? (
+                <Text style={styles.emptyCart}>Your cart is empty.</Text>
+              ) : (
+                cart.map(renderCartItem)
+              )}
             </View>
+          )}
+          <View style={styles.totalRow}>
+            <Text style={styles.totalLabel}>Total:</Text>
+            <Text style={styles.totalValue}>${getCartTotal().toFixed(2)}</Text>
           </View>
         </Card>
 
-        <Card style={styles.termsCard}>
-          <View style={styles.termsContainer}>
-            <TouchableOpacity
-              style={styles.checkbox}
-              onPress={() => handleInputChange('termsAccepted', !formData.termsAccepted)}
-            >
-              <Ionicons 
-                name={formData.termsAccepted ? "checkbox" : "square-outline"} 
-                size={24} 
-                color={formData.termsAccepted ? "#007AFF" : "#666"} 
-              />
-            </TouchableOpacity>
-            <Text style={styles.termsText}>
-              I agree to the terms and conditions and confirm that all information provided is accurate.
+        <Card style={styles.formCard}>
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Desired Credit Amount</Text>
+            <TextInput
+              style={styles.input}
+              value={desiredAmount}
+              onChangeText={setDesiredAmount}
+              placeholder="0.00"
+              keyboardType="numeric"
+              placeholderTextColor="#999"
+            />
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Down Payment (Optional)</Text>
+            <TextInput
+              style={styles.input}
+              value={downPayment}
+              onChangeText={setDownPayment}
+              placeholder="e.g. 100"
+              keyboardType="numeric"
+              placeholderTextColor="#999"
+            />
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Annual Income</Text>
+            <TextInput
+              style={styles.input}
+              value={annualIncome}
+              onChangeText={setAnnualIncome}
+              placeholder="e.g. 50000"
+              keyboardType="numeric"
+              placeholderTextColor="#999"
+            />
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Previous Credit History</Text>
+            <TextInput
+              style={[styles.input, styles.textArea]}
+              value={creditHistory}
+              onChangeText={setCreditHistory}
+              placeholder="Describe any previous loans or credit card history..."
+              multiline
+              numberOfLines={4}
+              placeholderTextColor="#999"
+            />
+            <Text style={styles.helperText}>
+              e.g. Personal loan from ABC Bank (2020-2022), Visa credit card since 2018.
             </Text>
           </View>
         </Card>
 
         <View style={styles.actionContainer}>
           <Button
+            title="Add Bank Details"
+            onPress={() => navigation.navigate('BankDetailsScreen', {
+              creditApplicationData: {
+                desiredAmount,
+                downPayment,
+                annualIncome,
+                creditHistory,
+              },
+            })}
+            variant="outline"
+            style={styles.bankDetailsButton}
+          />
+          <Button
             title="Submit Application"
-            onPress={handleSubmitApplication}
+            onPress={handleSubmit}
             loading={loading}
             style={styles.submitButton}
           />
@@ -269,7 +199,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: '#333',
-    marginBottom: 16,
+  },
+  summaryHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+  },
+  emptyCart: {
+    fontSize: 14,
+    color: '#666',
   },
   cartItem: {
     flexDirection: 'row',
@@ -316,58 +255,43 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#007AFF',
   },
-  paymentCard: {
+  formCard: {
     margin: 16,
     marginBottom: 0,
   },
-  userInfoCard: {
-    margin: 16,
-    marginBottom: 0,
+  inputGroup: {
+    marginBottom: 16,
   },
-  userInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  userInfoLabel: {
-    fontSize: 14,
-    color: '#666',
-  },
-  userInfoValue: {
+  inputLabel: {
     fontSize: 14,
     fontWeight: '600',
     color: '#333',
+    marginBottom: 6,
   },
-  kycStatus: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  input: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#e9ecef',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: '#333',
   },
-  kycText: {
-    fontSize: 14,
-    fontWeight: '600',
-    marginLeft: 4,
+  textArea: {
+    height: 120,
+    textAlignVertical: 'top',
   },
-  termsCard: {
-    margin: 16,
-    marginBottom: 0,
-  },
-  termsContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  checkbox: {
-    marginRight: 12,
-    marginTop: 2,
-  },
-  termsText: {
-    flex: 1,
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 20,
+  helperText: {
+    fontSize: 12,
+    color: '#999',
+    marginTop: 6,
   },
   actionContainer: {
     padding: 16,
+  },
+  bankDetailsButton: {
+    marginBottom: 12,
   },
   submitButton: {
     marginTop: 8,
@@ -375,3 +299,5 @@ const styles = StyleSheet.create({
 });
 
 export default CheckoutScreen;
+
+// end of file

@@ -19,7 +19,7 @@ const KYCUploadScreen = ({ navigation }) => {
     {
       id: 'nationalId',
       title: 'National ID',
-      description: 'Front and back of your national ID card. Supported formats: PDF, JPEG, PNG. Max size: 5MB',
+      description: 'Take a clear picture of yourself holding your national ID card (front side only). Supported formats: JPEG, PNG. Maximum file size: 5MB.',
       required: true,
     },
     {
@@ -73,8 +73,8 @@ const KYCUploadScreen = ({ navigation }) => {
       const result = await updateUser({ kycComplete: true });
       if (result.success) {
         Alert.alert(
-          'KYC Submitted',
-          'Your KYC verification has been submitted successfully. You will receive a notification once it\'s reviewed.',
+          'Verification Submitted',
+          'Your verification has been submitted successfully. You will receive a notification once it\'s reviewed.',
           [
             {
               text: 'OK',
@@ -83,19 +83,19 @@ const KYCUploadScreen = ({ navigation }) => {
           ]
         );
       } else {
-        Alert.alert('Error', 'Failed to submit KYC verification');
+        Alert.alert('Error', 'Failed to submit verification');
       }
     } catch (error) {
-      Alert.alert('Error', 'An error occurred while submitting KYC');
+      Alert.alert('Error', 'An error occurred while submitting verification');
     }
   };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>KYC Document Upload</Text>
+        <Text style={styles.title}>Verification Document Upload</Text>
         <Text style={styles.subtitle}>
-          Please upload the required documents to complete your KYC verification
+          Please upload the required documents to complete your verification
         </Text>
       </View>
 
@@ -117,7 +117,7 @@ const KYCUploadScreen = ({ navigation }) => {
 
       <View style={styles.submitContainer}>
         <Button
-          title="Submit KYC Verification"
+          title="Submit Verification"
           onPress={handleSubmitKYC}
           style={styles.submitButton}
         />

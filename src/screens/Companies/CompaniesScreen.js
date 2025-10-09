@@ -45,12 +45,11 @@ const CompaniesScreen = ({ navigation }) => {
       return;
     }
 
+    const q = searchQuery.toLowerCase();
     const filtered = companies.filter(company =>
-      company.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      company.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      company.specialties.some(specialty =>
-        specialty.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      company.name.toLowerCase().includes(q) ||
+      company.description.toLowerCase().includes(q) ||
+      (company.specialties || []).some(specialty => specialty.toLowerCase().includes(q))
     );
     setFilteredCompanies(filtered);
   };

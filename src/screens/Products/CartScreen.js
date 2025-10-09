@@ -116,7 +116,7 @@ const CartScreen = ({ navigation }) => {
           </Text>
           <Button
             title="Browse Products"
-            onPress={() => navigation.navigate('ProductCatalogScreen')}
+            onPress={() => navigation.navigate('StoreCatalogScreen')}
             style={styles.browseButton}
           />
         </View>

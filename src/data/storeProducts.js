@@ -1,0 +1,58 @@
+export const storeProducts = [
+  {
+    id: 'e-101',
+    name: 'Edgars Men’s Formal Shirt',
+    image: 'https://via.placeholder.com/400x280/007AFF/FFFFFF?text=Edgars+Shirt',
+    price: 120,
+    storeName: 'Edgars',
+    creditTerms: [3, 6, 12],
+    dateAdded: '2025-09-22',
+  },
+  {
+    id: 'e-102',
+    name: 'Edgars Women’s Handbag',
+    image: 'https://via.placeholder.com/400x280/FF6B35/FFFFFF?text=Edgars+Handbag',
+    price: 95,
+    storeName: 'Edgars',
+    creditTerms: [3, 6, 12],
+    dateAdded: '2025-09-28',
+  },
+  {
+    id: 'e-103',
+    name: 'Edgars Denim Jeans',
+    image: 'https://via.placeholder.com/400x280/6F42C1/FFFFFF?text=Edgars+Jeans',
+    price: 80,
+    storeName: 'Edgars',
+    creditTerms: [3, 6, 12],
+    dateAdded: '2025-09-18',
+  },
+  {
+    id: 'tv-201',
+    name: 'TV Sales 55" 4K Smart TV',
+    image: 'https://via.placeholder.com/400x280/28A745/FFFFFF?text=TV+Sales+55"+4K',
+    price: 750,
+    storeName: 'TV Sales & Home',
+    creditTerms: [6, 12, 18],
+    dateAdded: '2025-10-03',
+  },
+  {
+    id: 'tv-202',
+    name: 'TV Sales Defy Fridge 260L',
+    image: 'https://via.placeholder.com/400x280/20C997/FFFFFF?text=Defy+Fridge',
+    price: 620,
+    storeName: 'TV Sales & Home',
+    creditTerms: [6, 12],
+    dateAdded: '2025-09-30',
+  },
+  {
+    id: 'tv-203',
+    name: 'TV Sales LG Soundbar',
+    image: 'https://via.placeholder.com/400x280/DC3545/FFFFFF?text=LG+Soundbar',
+    price: 210,
+    storeName: 'TV Sales & Home',
+    creditTerms: [3, 6, 12],
+    dateAdded: '2025-09-25',
+  },
+];
+
+
