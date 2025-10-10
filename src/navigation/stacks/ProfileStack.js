@@ -16,7 +16,7 @@ const ProfileStack = () => {
       <Stack.Screen 
         name="KYCUpload" 
         component={KYCUploadScreen}
-        options={{ title: 'KYC Documents' }}
+        options={{ title: 'Verification Documents' }}
       />
     </Stack.Navigator>
   );

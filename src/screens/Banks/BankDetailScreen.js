@@ -10,26 +10,26 @@ import Button from '../../components/Button';
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
 import { useAuth } from '../../context/AuthContext';
-import { companyService } from '../../services/companyService';
+import { bankService } from '../../services/bankService';
 
-const CompanyDetailScreen = ({ route, navigation }) => {
-  const { company: initialCompany } = route.params;
+const BankDetailScreen = ({ route, navigation }) => {
+  const { bank: initialBank } = route.params;
   const { user } = useAuth();
-  const [company, setCompany] = useState(initialCompany);
+  const [bank, setBank] = useState(initialBank);
   const [reviews, setReviews] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    loadCompanyDetails();
+    loadBankDetails();
   }, []);
 
-  const loadCompanyDetails = async () => {
+  const loadBankDetails = async () => {
     setLoading(true);
     try {
       const [reviewsResult, productsResult] = await Promise.all([
-        companyService.getCompanyReviews(company.id),
-        companyService.getCompanyLoanProducts(company.id),
+        bankService.getBankReviews(bank.id),
+        bankService.getBankLoanProducts(bank.id),
       ]);
 
       if (reviewsResult.success) {
@@ -39,14 +39,14 @@ const CompanyDetailScreen = ({ route, navigation }) => {
         setProducts(productsResult.products);
       }
     } catch (error) {
-      console.error('Error loading company details:', error);
+      console.error('Error loading bank details:', error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleApplyForLoan = () => {
-    navigation.navigate('LoanApplication', { company });
+    navigation.navigate('LoanApplication', { bank });
   };
 
   const renderReview = (review, index) => (
@@ -94,22 +94,22 @@ const CompanyDetailScreen = ({ route, navigation }) => {
   );
 
   if (loading) {
-    return <Loader text="Loading company details..." />;
+    return <Loader text="Loading bank details..." />;
   }
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.companyName}>{company.name}</Text>
-        <View style={styles.companyRating}>
+        <Text style={styles.bankName}>{bank.name}</Text>
+        <View style={styles.bankRating}>
           <Ionicons name="star" size={20} color="#FFD700" />
-          <Text style={styles.ratingText}>{company.rating}</Text>
-          <Text style={styles.reviewsCount}>({company.reviews} reviews)</Text>
+          <Text style={styles.ratingText}>{bank.rating}</Text>
+          <Text style={styles.reviewsCount}>({bank.reviews} reviews)</Text>
         </View>
       </View>
 
       <Card style={styles.descriptionCard}>
-        <Text style={styles.description}>{company.description}</Text>
+        <Text style={styles.description}>{bank.description}</Text>
       </Card>
 
       <Card style={styles.detailsCard}>
@@ -119,7 +119,7 @@ const CompanyDetailScreen = ({ route, navigation }) => {
             <Ionicons name="trending-up" size={20} color="#28A745" />
             <View style={styles.detailContent}>
               <Text style={styles.detailLabel}>Interest Rate</Text>
-              <Text style={styles.detailValue}>{company.interestRate}</Text>
+              <Text style={styles.detailValue}>{bank.interestRate}</Text>
             </View>
           </View>
           <View style={styles.detailItem}>
@@ -127,7 +127,7 @@ const CompanyDetailScreen = ({ route, navigation }) => {
             <View style={styles.detailContent}>
               <Text style={styles.detailLabel}>Loan Amount</Text>
               <Text style={styles.detailValue}>
-                ${company.minLoanAmount.toLocaleString()} - ${company.maxLoanAmount.toLocaleString()}
+                ${bank.minLoanAmount.toLocaleString()} - ${bank.maxLoanAmount.toLocaleString()}
               </Text>
             </View>
           </View>
@@ -135,14 +135,14 @@ const CompanyDetailScreen = ({ route, navigation }) => {
             <Ionicons name="time-outline" size={20} color="#FF6B35" />
             <View style={styles.detailContent}>
               <Text style={styles.detailLabel}>Repayment Term</Text>
-              <Text style={styles.detailValue}>{company.loanTerm}</Text>
+              <Text style={styles.detailValue}>{bank.loanTerm}</Text>
             </View>
           </View>
           <View style={styles.detailItem}>
             <Ionicons name="business-outline" size={20} color="#6F42C1" />
             <View style={styles.detailContent}>
               <Text style={styles.detailLabel}>Established</Text>
-              <Text style={styles.detailValue}>{company.establishedYear}</Text>
+              <Text style={styles.detailValue}>{bank.establishedYear}</Text>
             </View>
           </View>
         </View>
@@ -150,7 +150,7 @@ const CompanyDetailScreen = ({ route, navigation }) => {
 
       <Card style={styles.requirementsCard}>
         <Text style={styles.sectionTitle}>Requirements</Text>
-        {company.requirements.map((requirement, index) => (
+        {bank.requirements.map((requirement, index) => (
           <View key={index} style={styles.requirementItem}>
             <Ionicons name="checkmark-circle" size={16} color="#28A745" />
             <Text style={styles.requirementText}>{requirement}</Text>
@@ -161,7 +161,7 @@ const CompanyDetailScreen = ({ route, navigation }) => {
       <Card style={styles.specialtiesCard}>
         <Text style={styles.sectionTitle}>Specialties</Text>
         <View style={styles.specialtiesList}>
-          {company.specialties.map((specialty, index) => (
+          {bank.specialties.map((specialty, index) => (
             <View key={index} style={styles.specialtyTag}>
               <Text style={styles.specialtyText}>{specialty}</Text>
             </View>
@@ -206,13 +206,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#e9ecef',
   },
-  companyName: {
+  bankName: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 8,
   },
-  companyRating: {
+  bankRating: {
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -392,4 +392,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CompanyDetailScreen;
+export default BankDetailScreen;

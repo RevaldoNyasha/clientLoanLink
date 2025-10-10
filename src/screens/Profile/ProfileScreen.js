@@ -101,7 +101,7 @@ const ProfileScreen = ({ navigation }) => {
                 styles.kycText,
                 { color: user?.kycComplete ? "#28A745" : "#FF6B35" }
               ]}>
-                {user?.kycComplete ? 'KYC Verified' : 'KYC Pending'}
+                {user?.kycComplete ? 'Verified' : 'Verification Pending'}
               </Text>
             </View>
           </View>
@@ -116,7 +116,7 @@ const ProfileScreen = ({ navigation }) => {
           />
           {!user?.kycComplete && (
             <Button
-              title="Complete KYC"
+              title="Verify Now"
               onPress={handleKYCUpload}
               size="small"
               style={styles.kycButton}
@@ -162,14 +162,14 @@ const ProfileScreen = ({ navigation }) => {
       <Card style={styles.kycCard}>
         <View style={styles.sectionHeader}>
           <Ionicons name="document-outline" size={20} color="#007AFF" />
-          <Text style={styles.sectionTitle}>KYC Documents</Text>
+          <Text style={styles.sectionTitle}>Verification Documents</Text>
         </View>
         
         <View style={styles.kycStatus}>
           <Text style={styles.kycDescription}>
             {user?.kycComplete
-              ? 'Your KYC verification is complete. All documents have been verified.'
-              : 'Complete your KYC verification by uploading the required documents.'
+              ? 'Your verification is complete. All documents have been verified.'
+              : 'Complete your verification by uploading the required documents.'
             }
           </Text>
         </View>

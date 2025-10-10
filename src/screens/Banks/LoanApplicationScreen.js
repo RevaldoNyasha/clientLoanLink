@@ -17,7 +17,7 @@ import { loanService } from '../../services/loanService';
 import { validators } from '../../utils/validators';
 
 const LoanApplicationScreen = ({ route, navigation }) => {
-  const { company } = route.params;
+  const { bank } = route.params;
   const { user } = useAuth();
   const [formData, setFormData] = useState({
     loanAmount: '',
@@ -82,7 +82,7 @@ const LoanApplicationScreen = ({ route, navigation }) => {
   const validateForm = () => {
     const rules = {
       loanAmount: [
-        (value) => validators.amount(value, company.minLoanAmount, company.maxLoanAmount)
+        (value) => validators.amount(value, bank.minLoanAmount, bank.maxLoanAmount)
       ],
       purpose: [validators.required],
       repaymentTerm: [validators.required],
@@ -115,14 +115,14 @@ const LoanApplicationScreen = ({ route, navigation }) => {
     setLoading(true);
     try {
       const applicationData = {
-        companyId: company.id,
-        companyName: company.name,
+        bankId: bank.id,
+        bankName: bank.name,
         userId: user.id,
         ...formData,
         loanAmount: parseFloat(formData.loanAmount),
         repaymentTerm: parseInt(formData.repaymentTerm),
         monthlyPayment: eligibility.requestedEMI,
-        interestRate: company.interestRate,
+        interestRate: bank.interestRate,
       };
 
       const result = await loanService.submitApplication(applicationData);
@@ -151,7 +151,7 @@ const LoanApplicationScreen = ({ route, navigation }) => {
     if (formData.loanAmount && formData.repaymentTerm) {
       const principal = parseFloat(formData.loanAmount);
       const months = parseInt(formData.repaymentTerm);
-      const annualRate = parseFloat(company.interestRate.replace('%', ''));
+      const annualRate = parseFloat(bank.interestRate.replace('%', ''));
       return loanService.calculateEMI(principal, annualRate, months);
     }
     return 0;
@@ -165,15 +165,15 @@ const LoanApplicationScreen = ({ route, navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
           <Text style={styles.title}>Loan Application</Text>
-          <Text style={styles.subtitle}>{company.name}</Text>
+          <Text style={styles.subtitle}>{bank.name}</Text>
         </View>
 
-        <Card style={styles.companyInfoCard}>
-          <View style={styles.companyInfo}>
-            <Text style={styles.companyName}>{company.name}</Text>
-            <Text style={styles.companyRate}>Interest Rate: {company.interestRate}</Text>
-            <Text style={styles.companyAmount}>
-              Amount Range: ${company.minLoanAmount.toLocaleString()} - ${company.maxLoanAmount.toLocaleString()}
+        <Card style={styles.bankInfoCard}>
+          <View style={styles.bankInfo}>
+            <Text style={styles.bankName}>{bank.name}</Text>
+            <Text style={styles.bankRate}>Interest Rate: {bank.interestRate}</Text>
+            <Text style={styles.bankAmount}>
+              Amount Range: ${bank.minLoanAmount.toLocaleString()} - ${bank.maxLoanAmount.toLocaleString()}
             </Text>
           </View>
         </Card>
@@ -333,26 +333,26 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
   },
-  companyInfoCard: {
+  bankInfoCard: {
     margin: 16,
     marginBottom: 0,
   },
-  companyInfo: {
+  bankInfo: {
     alignItems: 'center',
   },
-  companyName: {
+  bankName: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 8,
   },
-  companyRate: {
+  bankRate: {
     fontSize: 16,
     color: '#28A745',
     fontWeight: '600',
     marginBottom: 4,
   },
-  companyAmount: {
+  bankAmount: {
     fontSize: 14,
     color: '#666',
   },
