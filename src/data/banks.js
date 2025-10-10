@@ -1,4 +1,4 @@
-export const companies = [
+export const banks = [
   {
     id: '1',
     name: 'DHL',
@@ -80,3 +80,4 @@ export const companies = [
     specialties: ['Merchant Banking', 'Corporate Loans', 'Investment Services'],
   },
 ];
+

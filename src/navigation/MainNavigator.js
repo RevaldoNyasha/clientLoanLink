@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import ApplicationsStack from './stacks/ApplicationsStack';
-import CompaniesStack from './stacks/CompaniesStack';
+import BanksStack from './stacks/BanksStack';
 import DashboardStack from './stacks/DashboardStack';
 import ProductsStack from './stacks/ProductsStack';
 import ProfileStack from './stacks/ProfileStack';
@@ -36,7 +36,7 @@ const MainNavigator = () => {
       })}
     >
       <Tab.Screen name="Dashboard" component={DashboardStack} />
-      <Tab.Screen name="Loan" component={CompaniesStack} />
+      <Tab.Screen name="Loan" component={BanksStack} />
       <Tab.Screen name="Store" component={ProductsStack} />
       <Tab.Screen name="Applications" component={ApplicationsStack} />
       <Tab.Screen name="Profile" component={ProfileStack} />

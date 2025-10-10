@@ -160,13 +160,13 @@ const MyApplicationsScreen = ({ navigation }) => {
           <Ionicons name="document-text-outline" size={64} color="#ccc" />
           <Text style={styles.emptyTitle}>No Applications Yet</Text>
           <Text style={styles.emptySubtitle}>
-            Start by applying for a loan with one of our partner companies
+            Start by applying for a loan with one of our partner banks
           </Text>
           <TouchableOpacity
             style={styles.browseButton}
-            onPress={() => navigation.navigate('Companies')}
+            onPress={() => navigation.navigate('Loan')}
           >
-            <Text style={styles.browseButtonText}>Browse Companies</Text>
+            <Text style={styles.browseButtonText}>Browse Banks</Text>
           </TouchableOpacity>
         </View>
       ) : (
